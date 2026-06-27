@@ -42,9 +42,9 @@ Explanation: We can select the subset {1}, which can be placed in the array as [
 ## Solution
 
 **Language:** Java  
-**Runtime:** 0 ms  
-**Memory:** 42.3 MB  
-**Submitted:** 2026-06-27T19:04:54.945Z  
+**Runtime:** 52 ms (beats 86.05%)  
+**Memory:** 64.8 MB (beats 83.72%)  
+**Submitted:** 2026-06-27T19:05:01.609Z  
 
 ```java
 import java.util.HashMap;
