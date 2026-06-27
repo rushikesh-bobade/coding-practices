@@ -3,7 +3,7 @@ class Solution {
         
         int count=0;
         for(int i=0;i<nums.length;i++){
-            if(nums[i]%2==0 && nums[i]!=1){
+            if(nums[i]%2==0){
                 count++;
             }
         }
@@ -11,6 +11,6 @@ class Solution {
         if(count%2!=0){
             return count;
         }
-        return count;
+        return 1;
     }
 }
