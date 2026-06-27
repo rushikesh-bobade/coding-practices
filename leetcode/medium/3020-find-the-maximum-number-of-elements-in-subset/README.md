@@ -43,8 +43,8 @@ Explanation: We can select the subset {1}, which can be placed in the array as [
 
 **Language:** Java  
 **Runtime:** 0 ms  
-**Memory:** 42.5 MB  
-**Submitted:** 2026-06-27T18:25:27.136Z  
+**Memory:** 42.6 MB  
+**Submitted:** 2026-06-27T18:27:38.663Z  
 
 ```java
 class Solution {
@@ -52,7 +52,7 @@ class Solution {
         
         int count=0;
         for(int i=0;i<nums.length;i++){
-            if(nums[i]%2==0){
+            if(nums[i]%2==0 && nums[i]!=1){
                 count++;
             }
         }
