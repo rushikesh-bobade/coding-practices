@@ -43,8 +43,8 @@ Explanation: We can select the subset {1}, which can be placed in the array as [
 
 **Language:** Java  
 **Runtime:** 0 ms  
-**Memory:** 42.5 MB  
-**Submitted:** 2026-06-27T19:05:18.300Z  
+**Memory:** 42.3 MB  
+**Submitted:** 2026-06-27T19:04:54.945Z  
 
 ```java
 import java.util.HashMap;
