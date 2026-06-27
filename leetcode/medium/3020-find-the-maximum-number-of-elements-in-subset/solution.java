@@ -1,3 +1,6 @@
+import java.util.HashMap;
+import java.util.Map;
+
 class Solution {
     public int maximumLength(int[] nums) {
 
@@ -11,33 +14,51 @@ class Solution {
 
         // Handle 1 separately
         if (freq.containsKey(1L)) {
-            int ones = freq.get(1L);
-            ans = Math.max(ans, (ones % 2 == 0) ? ones - 1 : ones);
+            int count = freq.get(1L);
+            ans = Math.max(ans, (count % 2 == 0) ? count - 1 : count);
         }
 
-        for (long x : freq.keySet()) {
+        for (long start : freq.keySet()) {
 
-            if (x == 1) continue;
+            if (start == 1L) continue;
 
-            long curr = x;
-            int length = 0;
+            long curr = start;
+            int len = 0;
 
-            while (freq.getOrDefault(curr, 0) >= 2) {
-                length += 2;
+            while (true) {
 
-                if (curr > 1000000000L / curr)
+                int count = freq.getOrDefault(curr, 0);
+
+                if (count < 2) {
+                    if (count == 1) {
+                        len++;
+                    } else if (len > 0) {
+                        len--;
+                    }
                     break;
+                }
 
-                curr *= curr;
+                // We have at least two copies
+                len += 2;
+
+                // Prevent overflow
+                if (curr > (long) Math.sqrt(Long.MAX_VALUE)) {
+                    len--;
+                    break;
+                }
+
+                long next = curr * curr;
+
+                // Can't continue the chain
+                if (!freq.containsKey(next)) {
+                    len--;
+                    break;
+                }
+
+                curr = next;
             }
 
-            if (freq.getOrDefault(curr, 0) >= 1) {
-                length++;
-            } else {
-                length--;
-            }
-
-            ans = Math.max(ans, length);
+            ans = Math.max(ans, len);
         }
 
         return ans;
