@@ -43,24 +43,53 @@ Explanation: We can select the subset {1}, which can be placed in the array as [
 
 **Language:** Java  
 **Runtime:** 0 ms  
-**Memory:** 42.3 MB  
-**Submitted:** 2026-06-27T18:29:42.922Z  
+**Memory:** 42.5 MB  
+**Submitted:** 2026-06-27T19:04:09.169Z  
 
 ```java
 class Solution {
     public int maximumLength(int[] nums) {
-        
-        int count=0;
-        for(int i=0;i<nums.length;i++){
-            if(nums[i]%2==0){
-                count++;
-            }
+
+        Map<Long, Integer> freq = new HashMap<>();
+
+        for (int num : nums) {
+            freq.put((long) num, freq.getOrDefault((long) num, 0) + 1);
         }
 
-        if(count%2!=0){
-            return count;
+        int ans = 1;
+
+        // Handle 1 separately
+        if (freq.containsKey(1L)) {
+            int ones = freq.get(1L);
+            ans = Math.max(ans, (ones % 2 == 0) ? ones - 1 : ones);
         }
-        return 1;
+
+        for (long x : freq.keySet()) {
+
+            if (x == 1) continue;
+
+            long curr = x;
+            int length = 0;
+
+            while (freq.getOrDefault(curr, 0) >= 2) {
+                length += 2;
+
+                if (curr > 1000000000L / curr)
+                    break;
+
+                curr *= curr;
+            }
+
+            if (freq.getOrDefault(curr, 0) >= 1) {
+                length++;
+            } else {
+                length--;
+            }
+
+            ans = Math.max(ans, length);
+        }
+
+        return ans;
     }
 }
 ```
