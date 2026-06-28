@@ -1,46 +1,42 @@
-import java.util.HashSet;
-import java.util.Set;
-
-class Solution{
+class Solution {
 
     public boolean isValidSudoku(char[][] board) {
-            for(int i=0;i<9;i++){
-                for(int j=0;j<9;j++){
-                    // if(board[i][j]!='.'){
-                        if(!isValid(board,i,j)){
-                            return false;
-                        }
-                    //}
-                }
-            }
-            return true;
-    }
-
-    public boolean isValid(char[][] board, int row, int column) {
 
         for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
 
-            if (i != column && board[row][i] == board[row][column])
-                return false;
-
-            if (i != row && board[i][column] == board[row][column])
-                return false;
-
-            int r = (row / 3) * 3 + i / 3;
-            int c = (column / 3) * 3 + i % 3;
-
-            if ((r != row || c != column) &&
-                board[r][c] == board[row][column])
-                return false;
+                if (!isValid(i, j, board))
+                    return false;
+            }
         }
 
         return true;
     }
 
+    private boolean isValid(int row, int col, char[][] board) {
+
+        if (board[row][col] == '.')
+            return true;
+
+        for (int i = 0; i < 9; i++) {
+
+            if (col != i && board[row][i] == board[row][col])
+                return false;
+
+            if (row != i && board[i][col] == board[row][col])
+                return false;
+
+            int r = 3 * (row / 3) + i / 3;
+            int c = 3 * (col / 3) + i % 3;
+
+            if (((r != row) || (c != col)) &&
+                board[r][c] == board[row][col])
+                return false;
+        }
+
+        return true;
+    }
 }
-
-
-
 
 
 
