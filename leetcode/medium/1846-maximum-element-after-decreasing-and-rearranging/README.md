@@ -64,22 +64,20 @@ Explanation: The array already satisfies the conditions, and the largest element
 
 **Language:** Java  
 **Runtime:** 1 ms  
-**Memory:** 42.3 MB  
-**Submitted:** 2026-06-28T14:12:59.760Z  
+**Memory:** 42.7 MB  
+**Submitted:** 2026-06-28T14:14:00.173Z  
 
 ```java
 class Solution {
     public int maximumElementAfterDecrementingAndRearranging(int[] arr) {
         Arrays.sort(arr);
 
-        int min=1;
         arr[0]=1;
         for(int i=1;i<arr.length;i++){
-            min=Math.min(arr[i],arr[i-1]+1);
-            arr[i]=min;
+            arr[i]=Math.min(arr[i],arr[i-1]+1);
         }
 
-        return min;
+        return arr[arr.length-1];
     }
 }
 ```
