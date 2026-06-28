@@ -63,9 +63,9 @@ Explanation: Same as Example 1, except with the 5 in the top left corner being m
 ## Solution
 
 **Language:** Java  
-**Runtime:** 0 ms  
-**Memory:** 42.4 MB  
-**Submitted:** 2026-06-28T18:50:50.256Z  
+**Runtime:** 1 ms (beats 99.96%)  
+**Memory:** 46.4 MB (beats 71.56%)  
+**Submitted:** 2026-06-28T18:51:48.314Z  
 
 ```java
 class Solution {
@@ -86,7 +86,6 @@ class Solution {
 
     private boolean isValid(int row, int col, char[][] board) {
 
-        
 
         for (int i = 0; i < 9; i++) {
 
