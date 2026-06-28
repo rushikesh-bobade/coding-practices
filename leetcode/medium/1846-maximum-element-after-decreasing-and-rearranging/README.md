@@ -63,25 +63,49 @@ Explanation: The array already satisfies the conditions, and the largest element
 ## Solution
 
 **Language:** Java  
-**Runtime:** 8 ms (beats 82.92%)  
-**Memory:** 77.5 MB (beats 41.25%)  
-**Submitted:** 2026-06-28T14:17:07.196Z  
+**Runtime:** 0 ms  
+**Memory:** 42.7 MB  
+**Submitted:** 2026-06-28T14:36:29.071Z  
 
 ```java
 class Solution {
     public int maximumElementAfterDecrementingAndRearranging(int[] arr) {
-        Arrays.sort(arr);
 
-        arr[0]=1;
+
+
+
+        //Approach 1: Greedy approach O(N log N) and space complexity is O(1)
+        // Arrays.sort(arr);
+
+        // arr[0]=1;
+        // for(int i=1;i<arr.length;i++){
+        //     //arr[i]=Math.min(arr[i],arr[i-1]+1);
+        //     //or
+        //     if(arr[i]>arr[i-1]+1){
+        //     arr[i]=arr[i-1]+1;
+        //     }
+        // }
+
+        // return arr[arr.length-1];
+
+
+
+        //APPRAOCH 2 : T.C. O(n) but S.C. is O(N)
+
+        int count[]=new int[arr.length+1];
+        count[0]=1;
         for(int i=1;i<arr.length;i++){
-            //arr[i]=Math.min(arr[i],arr[i-1]+1);
-            //or
-            if(arr[i]>arr[i-1]+1){
-            arr[i]=arr[i-1]+1;
-            }
+            count[Math.min(arr[i],arr.length)]++;
         }
 
-        return arr[arr.length-1];
+        int ans = 0;
+
+        for (int i = 1; i <= arr.length; i++) {
+            ans = Math.min(ans + count[i], i);
+        }
+
+        return ans;
+
     }
 }
 ```
