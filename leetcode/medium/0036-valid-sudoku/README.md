@@ -65,7 +65,7 @@ Explanation: Same as Example 1, except with the 5 in the top left corner being m
 **Language:** Java  
 **Runtime:** 0 ms  
 **Memory:** 42.6 MB  
-**Submitted:** 2026-06-28T18:40:51.285Z  
+**Submitted:** 2026-06-28T18:44:07.899Z  
 
 ```java
 import java.util.HashSet;
@@ -76,17 +76,18 @@ class Solution{
     public boolean isValidSudoku(char[][] board) {
             for(int i=0;i<9;i++){
                 for(int j=0;j<9;j++){
-                    if(board[i][j]!='.'){
+                    // if(board[i][j]!='.'){
                         if(!isValid(board,i,j)){
                             return false;
                         }
-                    }
+                    //}
                 }
             }
             return true;
     }
 
     public boolean isValid(char board[][],int row,int column){
+         if(board[row][column]=='.'){ return true;}
 
         for(int i=0;i<9;i++){
             if(row!=i && board[row][i]==board[row][column]){
@@ -95,7 +96,7 @@ class Solution{
             if(column!=i && board[i][column]==board[row][column]){
                 return false;
             }
-            if(((row/3)*3+i/3)!=row && (column/3)*3+i%3!=column && board[(row/3)*3+i/3][(column/3)*3+i%3]==board[row][column]){
+            if(((row/3)*3+i/3)!=row && ((column/3)*3+i%3)!=column && board[(row/3)*3+i/3][(column/3)*3+i%3]==board[row][column]){
                 return false;
             }
         }
