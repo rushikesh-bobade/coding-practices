@@ -1,36 +1,36 @@
 class Solution {
     public long maxSubarraySum(int[] nums, int k) {
 
-        long noOp = nums[0];
+        long normal = nums[0];
 
         long mul = nums[0] * k;
         long div = nums[0] / k;
 
-        long ans = Math.max(noOp, Math.max(mul, div));
+        long best = Math.max(normal, Math.max(mul, div));
 
         for (int i = 1; i < nums.length; i++) {
 
             long x = nums[i];
 
-            long newNoOp = Math.max(x, noOp + x);
+            long newNormal = Math.max(x, normal + x);
 
             long newMul = Math.max(
                 x * k,
-                Math.max(noOp + x * k, mul + x * k)
+                Math.max(normal + x * k, mul + x * k)
             );
 
             long newDiv = Math.max(
                 x / k,
-                Math.max(noOp + x / k, div + x / k)
+                Math.max(normal + x / k, div + x / k)
             );
 
-            noOp = newNoOp;
+            normal = newNormal;
             mul = newMul;
             div = newDiv;
 
-            ans = Math.max(ans, Math.max(noOp, Math.max(mul, div)));
+            best = Math.max(best, Math.max(normal, Math.max(mul, div)));
         }
 
-        return ans;
+        return best;
     }
 }
