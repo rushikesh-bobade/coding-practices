@@ -54,45 +54,34 @@ A  **subarray**  is a contiguous  **non-empty**  sequence of elements within an 
 ## Solution
 
 **Language:** Java  
-**Runtime:** 15 ms  
-**Memory:** 51.4 MB  
-**Submitted:** 2026-06-28T07:47:35.746Z  
+**Runtime:** 0 ms  
+**Memory:** 42.4 MB  
+**Submitted:** 2026-06-28T07:51:16.587Z  
 
 ```java
 class Solution {
     public long maxSubarraySum(int[] nums, int k) {
+        long base = nums[0];                 // best subarray ending here, unmodified
+        long mul  = (long) nums[0] * k;       // best subarray ending here, exactly one *k applied
+        long div  = nums[0] / k;              // best subarray ending here, exactly one /k applied
 
-        long normal = nums[0];
-
-        long mul = nums[0] * k;
-        long div = nums[0] / k;
-
-        long best = Math.max(normal, Math.max(mul, div));
+        long ans = Math.max(mul, div);
 
         for (int i = 1; i < nums.length; i++) {
-
             long x = nums[i];
 
-            long newNormal = Math.max(x, normal + x);
+            long newMul  = Math.max(x * (long) k, Math.max(base + x * (long) k, mul + x));
+            long newDiv  = Math.max(x / k,        Math.max(base + x / k,        div + x));
+            long newBase = Math.max(x, base + x);
 
-            long newMul = Math.max(
-                x * k,
-                Math.max(normal + x * k, mul + x * k)
-            );
+            mul  = newMul;
+            div  = newDiv;
+            base = newBase;
 
-            long newDiv = Math.max(
-                x / k,
-                Math.max(normal + x / k, div + x / k)
-            );
-
-            normal = newNormal;
-            mul = newMul;
-            div = newDiv;
-
-            best = Math.max(best, Math.max(normal, Math.max(mul, div)));
+            ans = Math.max(ans, Math.max(mul, div));
         }
 
-        return best;
+        return ans;
     }
 }
 ```
