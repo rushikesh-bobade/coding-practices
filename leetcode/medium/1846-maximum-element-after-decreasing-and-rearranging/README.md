@@ -64,8 +64,8 @@ Explanation: The array already satisfies the conditions, and the largest element
 
 **Language:** Java  
 **Runtime:** 1 ms  
-**Memory:** 42.6 MB  
-**Submitted:** 2026-06-28T14:11:58.169Z  
+**Memory:** 42.3 MB  
+**Submitted:** 2026-06-28T14:12:59.760Z  
 
 ```java
 class Solution {
@@ -76,7 +76,7 @@ class Solution {
         arr[0]=1;
         for(int i=1;i<arr.length;i++){
             min=Math.min(arr[i],arr[i-1]+1);
-
+            arr[i]=min;
         }
 
         return min;
