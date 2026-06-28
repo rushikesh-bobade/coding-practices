@@ -16,7 +16,6 @@ class Solution {
 
     private boolean isValid(int row, int col, char[][] board) {
 
-        
 
         for (int i = 0; i < 9; i++) {
 
