@@ -54,62 +54,45 @@ A  **subarray**  is a contiguous  **non-empty**  sequence of elements within an 
 ## Solution
 
 **Language:** Java  
-**Runtime:** 0 ms  
-**Memory:** 42.7 MB  
-**Submitted:** 2026-06-28T07:46:16.953Z  
+**Runtime:** 15 ms  
+**Memory:** 51.4 MB  
+**Submitted:** 2026-06-28T07:47:35.746Z  
 
 ```java
 class Solution {
     public long maxSubarraySum(int[] nums, int k) {
 
-        long dp0 = nums[0];
+        long normal = nums[0];
 
-        long dp1Mul = nums[0] * k;
-        long dp1Div = nums[0] / k;
+        long mul = nums[0] * k;
+        long div = nums[0] / k;
 
-        long dp2Mul = Long.MIN_VALUE / 4;
-        long dp2Div = Long.MIN_VALUE / 4;
-
-        long ans = Math.max(dp0, Math.max(dp1Mul, dp1Div));
+        long best = Math.max(normal, Math.max(mul, div));
 
         for (int i = 1; i < nums.length; i++) {
 
             long x = nums[i];
 
-            long newDp0 = Math.max(x, dp0 + x);
+            long newNormal = Math.max(x, normal + x);
 
-            long newDp1Mul = Math.max(
+            long newMul = Math.max(
                 x * k,
-                Math.max(dp0 + x * k, dp1Mul + x)
+                Math.max(normal + x * k, mul + x * k)
             );
 
-            long newDp1Div = Math.max(
+            long newDiv = Math.max(
                 x / k,
-                Math.max(dp0 + x / k, dp1Div + x)
+                Math.max(normal + x / k, div + x / k)
             );
 
-            long newDp2Mul = Math.max(
-                dp2Mul + x,
-                dp1Mul + x
-            );
+            normal = newNormal;
+            mul = newMul;
+            div = newDiv;
 
-            long newDp2Div = Math.max(
-                dp2Div + x,
-                dp1Div + x
-            );
-
-            dp0 = newDp0;
-            dp1Mul = newDp1Mul;
-            dp1Div = newDp1Div;
-            dp2Mul = newDp2Mul;
-            dp2Div = newDp2Div;
-
-            ans = Math.max(ans,
-                Math.max(dp0, Math.max(dp2Mul, dp2Div))
-            );
+            best = Math.max(best, Math.max(normal, Math.max(mul, div)));
         }
 
-        return ans;
+        return best;
     }
 }
 ```
