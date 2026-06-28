@@ -55,57 +55,41 @@ A  **subarray**  is a contiguous  **non-empty**  sequence of elements within an 
 
 **Language:** Java  
 **Runtime:** 0 ms  
-**Memory:** 42.7 MB  
-**Submitted:** 2026-06-28T07:43:19.455Z  
+**Memory:** 42.5 MB  
+**Submitted:** 2026-06-28T07:45:41.212Z  
 
 ```java
 class Solution {
     public long maxSubarraySum(int[] nums, int k) {
 
-        long dp0 = nums[0];
-        long dp1Mul = nums[0] * k;
-        long dp1Div = nums[0] / k;
+        long noOp = nums[0];
 
-        long dp2Mul = Long.MIN_VALUE / 2;
-        long dp2Div = Long.MIN_VALUE / 2;
+        long mul = nums[0] * k;
+        long div = nums[0] / k;
 
-        long ans = Math.max(dp0, Math.max(dp1Mul, dp1Div));
+        long ans = Math.max(noOp, Math.max(mul, div));
 
         for (int i = 1; i < nums.length; i++) {
 
             long x = nums[i];
 
-            long newDp0 = Math.max(x, dp0 + x);
+            long newNoOp = Math.max(x, noOp + x);
 
-            long newDp1Mul = Math.max(
+            long newMul = Math.max(
                 x * k,
-                Math.max(dp0 + x * k, dp1Mul + x * k)
+                Math.max(noOp + x * k, mul + x * k)
             );
 
-            long newDp1Div = Math.max(
+            long newDiv = Math.max(
                 x / k,
-                Math.max(dp0 + x / k, dp1Div + x / k)
+                Math.max(noOp + x / k, div + x / k)
             );
 
-            long newDp2Mul = dp2Mul == Long.MIN_VALUE / 2
-                ? Long.MIN_VALUE / 2
-                : Math.max(dp2Mul + x, dp1Mul + x);
+            noOp = newNoOp;
+            mul = newMul;
+            div = newDiv;
 
-            long newDp2Div = dp2Div == Long.MIN_VALUE / 2
-                ? Long.MIN_VALUE / 2
-                : Math.max(dp2Div + x, dp1Div + x);
-
-            // also allow transition from dp1 → dp2
-            newDp2Mul = Math.max(newDp2Mul, dp1Mul + x);
-            newDp2Div = Math.max(newDp2Div, dp1Div + x);
-
-            dp0 = newDp0;
-            dp1Mul = newDp1Mul;
-            dp1Div = newDp1Div;
-            dp2Mul = newDp2Mul;
-            dp2Div = newDp2Div;
-
-            ans = Math.max(ans, Math.max(dp0, Math.max(dp2Mul, dp2Div)));
+            ans = Math.max(ans, Math.max(noOp, Math.max(mul, div)));
         }
 
         return ans;
