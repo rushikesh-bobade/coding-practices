@@ -1,36 +1,53 @@
 class Solution {
     public long maxSubarraySum(int[] nums, int k) {
 
-        long normal = nums[0];
+        long dp0 = nums[0];
 
-        long mul = nums[0] * k;
-        long div = nums[0] / k;
+        long dp1Mul = nums[0] * k;
+        long dp1Div = nums[0] / k;
 
-        long best = Math.max(normal, Math.max(mul, div));
+        long dp2Mul = Long.MIN_VALUE / 4;
+        long dp2Div = Long.MIN_VALUE / 4;
+
+        long ans = Math.max(dp0, Math.max(dp1Mul, dp1Div));
 
         for (int i = 1; i < nums.length; i++) {
 
             long x = nums[i];
 
-            long newNormal = Math.max(x, normal + x);
+            long newDp0 = Math.max(x, dp0 + x);
 
-            long newMul = Math.max(
+            long newDp1Mul = Math.max(
                 x * k,
-                Math.max(normal + x * k, mul + x * k)
+                Math.max(dp0 + x * k, dp1Mul + x)
             );
 
-            long newDiv = Math.max(
+            long newDp1Div = Math.max(
                 x / k,
-                Math.max(normal + x / k, div + x / k)
+                Math.max(dp0 + x / k, dp1Div + x)
             );
 
-            normal = newNormal;
-            mul = newMul;
-            div = newDiv;
+            long newDp2Mul = Math.max(
+                dp2Mul + x,
+                dp1Mul + x
+            );
 
-            best = Math.max(best, Math.max(normal, Math.max(mul, div)));
+            long newDp2Div = Math.max(
+                dp2Div + x,
+                dp1Div + x
+            );
+
+            dp0 = newDp0;
+            dp1Mul = newDp1Mul;
+            dp1Div = newDp1Div;
+            dp2Mul = newDp2Mul;
+            dp2Div = newDp2Div;
+
+            ans = Math.max(ans,
+                Math.max(dp0, Math.max(dp2Mul, dp2Div))
+            );
         }
 
-        return best;
+        return ans;
     }
 }
