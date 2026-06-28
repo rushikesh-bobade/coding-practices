@@ -64,8 +64,8 @@ Explanation: Same as Example 1, except with the 5 in the top left corner being m
 
 **Language:** Java  
 **Runtime:** 0 ms  
-**Memory:** 42.6 MB  
-**Submitted:** 2026-06-28T18:44:07.899Z  
+**Memory:** 42.3 MB  
+**Submitted:** 2026-06-28T18:46:23.876Z  
 
 ```java
 import java.util.HashSet;
@@ -86,19 +86,22 @@ class Solution{
             return true;
     }
 
-    public boolean isValid(char board[][],int row,int column){
-         if(board[row][column]=='.'){ return true;}
+    public boolean isValid(char[][] board, int row, int column) {
 
-        for(int i=0;i<9;i++){
-            if(row!=i && board[row][i]==board[row][column]){
+        for (int i = 0; i < 9; i++) {
+
+            if (i != column && board[row][i] == board[row][column])
                 return false;
-            }
-            if(column!=i && board[i][column]==board[row][column]){
+
+            if (i != row && board[i][column] == board[row][column])
                 return false;
-            }
-            if(((row/3)*3+i/3)!=row && ((column/3)*3+i%3)!=column && board[(row/3)*3+i/3][(column/3)*3+i%3]==board[row][column]){
+
+            int r = (row / 3) * 3 + i / 3;
+            int c = (column / 3) * 3 + i % 3;
+
+            if ((r != row || c != column) &&
+                board[r][c] == board[row][column])
                 return false;
-            }
         }
 
         return true;
