@@ -25,7 +25,7 @@ class Solution{
             if(column!=i && board[i][column]==board[row][column]){
                 return false;
             }
-            if(board[(row/3)*3+i/3][(column/3)*3+i%3]==board[row][column]){
+            if(((row/3)*3+i/3)!=row && (column/3)*3+i%3!=column && board[(row/3)*3+i/3][(column/3)*3+i%3]==board[row][column]){
                 return false;
             }
         }
