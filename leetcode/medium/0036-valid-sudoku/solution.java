@@ -4,9 +4,10 @@ class Solution {
 
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-
-                if (!isValid(i, j, board))
+                if (board[i][j] != '.'){
+                    if (!isValid(i, j, board))
                     return false;
+                }
             }
         }
 
@@ -15,8 +16,7 @@ class Solution {
 
     private boolean isValid(int row, int col, char[][] board) {
 
-        if (board[row][col] == '.')
-            return true;
+        
 
         for (int i = 0; i < 9; i++) {
 
