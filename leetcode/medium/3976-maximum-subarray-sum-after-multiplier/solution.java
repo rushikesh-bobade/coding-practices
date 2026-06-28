@@ -1,32 +1,33 @@
 class Solution {
     public long maxSubarraySum(int[] nums, int k) {
+        final long NEG = Long.MIN_VALUE / 4; // safe sentinel, won't overflow on +x
 
         long base = nums[0];
-        long ans = nums[0];
+        long runMul = (long) nums[0] * k;
+        long doneMul = NEG;
+        long runDiv = nums[0] / k;     // Java truncation = floor(+), ceil(-) — matches spec
+        long doneDiv = NEG;
 
-        // best gain if we apply operation in current subarray
-        long mulGain = (long)nums[0] * (k - 1);
-        long divGain = (long)(nums[0] / k - nums[0]);
-
-        long mulBest = nums[0] + mulGain;
-        long divBest = nums[0] + divGain;
+        long ans = Math.max(runMul, runDiv);
 
         for (int i = 1; i < nums.length; i++) {
-
             long x = nums[i];
+            long xMul = x * (long) k;
+            long xDiv = x / k;
 
-            base = Math.max(x, base + x);
+            long newBase    = Math.max(x, base + x);
+            long newRunMul  = Math.max(xMul, Math.max(runMul + xMul, base + xMul));
+            long newDoneMul = Math.max(runMul + x, doneMul + x);
+            long newRunDiv  = Math.max(xDiv, Math.max(runDiv + xDiv, base + xDiv));
+            long newDoneDiv = Math.max(runDiv + x, doneDiv + x);
 
-            long gainMul = x * (k - 1);
-            long gainDiv = (x / k) - x;
+            base = newBase;
+            runMul = newRunMul;
+            doneMul = newDoneMul;
+            runDiv = newRunDiv;
+            doneDiv = newDoneDiv;
 
-            mulGain = Math.max(gainMul, mulGain + gainMul);
-            divGain = Math.max(gainDiv, divGain + gainDiv);
-
-            mulBest = Math.max(mulBest, base + mulGain);
-            divBest = Math.max(divBest, base + divGain);
-
-            ans = Math.max(ans, Math.max(base, Math.max(mulBest, divBest)));
+            ans = Math.max(ans, Math.max(Math.max(runMul, doneMul), Math.max(runDiv, doneDiv)));
         }
 
         return ans;
