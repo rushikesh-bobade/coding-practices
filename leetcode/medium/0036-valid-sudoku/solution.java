@@ -6,17 +6,18 @@ class Solution{
     public boolean isValidSudoku(char[][] board) {
             for(int i=0;i<9;i++){
                 for(int j=0;j<9;j++){
-                    if(board[i][j]!='.'){
+                    // if(board[i][j]!='.'){
                         if(!isValid(board,i,j)){
                             return false;
                         }
-                    }
+                    //}
                 }
             }
             return true;
     }
 
     public boolean isValid(char board[][],int row,int column){
+         if(board[row][column]=='.'){ return true;}
 
         for(int i=0;i<9;i++){
             if(row!=i && board[row][i]==board[row][column]){
@@ -25,7 +26,7 @@ class Solution{
             if(column!=i && board[i][column]==board[row][column]){
                 return false;
             }
-            if(((row/3)*3+i/3)!=row && (column/3)*3+i%3!=column && board[(row/3)*3+i/3][(column/3)*3+i%3]==board[row][column]){
+            if(((row/3)*3+i/3)!=row && ((column/3)*3+i%3)!=column && board[(row/3)*3+i/3][(column/3)*3+i%3]==board[row][column]){
                 return false;
             }
         }
