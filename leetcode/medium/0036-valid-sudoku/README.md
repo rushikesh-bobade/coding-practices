@@ -64,8 +64,8 @@ Explanation: Same as Example 1, except with the 5 in the top left corner being m
 
 **Language:** Java  
 **Runtime:** 0 ms  
-**Memory:** 42.7 MB  
-**Submitted:** 2026-06-28T18:38:49.515Z  
+**Memory:** 42.6 MB  
+**Submitted:** 2026-06-28T18:40:51.285Z  
 
 ```java
 import java.util.HashSet;
@@ -95,7 +95,7 @@ class Solution{
             if(column!=i && board[i][column]==board[row][column]){
                 return false;
             }
-            if(board[(row/3)*3+i/3][(column/3)*3+i%3]==board[row][column]){
+            if(((row/3)*3+i/3)!=row && (column/3)*3+i%3!=column && board[(row/3)*3+i/3][(column/3)*3+i%3]==board[row][column]){
                 return false;
             }
         }
