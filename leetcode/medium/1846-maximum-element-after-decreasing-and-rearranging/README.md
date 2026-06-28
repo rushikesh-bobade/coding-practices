@@ -63,9 +63,9 @@ Explanation: The array already satisfies the conditions, and the largest element
 ## Solution
 
 **Language:** Java  
-**Runtime:** 1 ms  
-**Memory:** 42.8 MB  
-**Submitted:** 2026-06-28T14:17:00.424Z  
+**Runtime:** 8 ms (beats 82.92%)  
+**Memory:** 77.5 MB (beats 41.25%)  
+**Submitted:** 2026-06-28T14:17:07.196Z  
 
 ```java
 class Solution {
