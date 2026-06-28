@@ -64,8 +64,8 @@ Explanation: The array already satisfies the conditions, and the largest element
 
 **Language:** Java  
 **Runtime:** 0 ms  
-**Memory:** 42.7 MB  
-**Submitted:** 2026-06-28T14:36:29.071Z  
+**Memory:** 42.4 MB  
+**Submitted:** 2026-06-28T14:36:54.595Z  
 
 ```java
 class Solution {
@@ -92,15 +92,16 @@ class Solution {
 
         //APPRAOCH 2 : T.C. O(n) but S.C. is O(N)
 
-        int count[]=new int[arr.length+1];
-        count[0]=1;
-        for(int i=1;i<arr.length;i++){
-            count[Math.min(arr[i],arr.length)]++;
+        int n = arr.length;
+        int[] count = new int[n + 1];
+
+        for (int x : arr) {
+            count[Math.min(x, n)]++;
         }
 
         int ans = 0;
 
-        for (int i = 1; i <= arr.length; i++) {
+        for (int i = 1; i <= n; i++) {
             ans = Math.min(ans + count[i], i);
         }
 
