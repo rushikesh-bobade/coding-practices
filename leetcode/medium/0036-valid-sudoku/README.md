@@ -64,8 +64,8 @@ Explanation: Same as Example 1, except with the 5 in the top left corner being m
 
 **Language:** Java  
 **Runtime:** 0 ms  
-**Memory:** 42.5 MB  
-**Submitted:** 2026-06-28T18:49:18.556Z  
+**Memory:** 42.4 MB  
+**Submitted:** 2026-06-28T18:50:50.256Z  
 
 ```java
 class Solution {
@@ -74,9 +74,10 @@ class Solution {
 
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-
-                if (!isValid(i, j, board))
+                if (board[i][j] != '.'){
+                    if (!isValid(i, j, board))
                     return false;
+                }
             }
         }
 
@@ -85,8 +86,7 @@ class Solution {
 
     private boolean isValid(int row, int col, char[][] board) {
 
-        if (board[row][col] == '.')
-            return true;
+        
 
         for (int i = 0; i < 9; i++) {
 
