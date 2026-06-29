@@ -49,8 +49,8 @@ Since an empty string reads the same forward and backward, it is a palindrome.
 
 **Language:** Java  
 **Runtime:** 0 ms  
-**Memory:** 42.2 MB  
-**Submitted:** 2026-06-29T18:00:37.347Z  
+**Memory:** 42.4 MB  
+**Submitted:** 2026-06-29T18:01:05.865Z  
 
 ```java
 class Solution {
@@ -61,11 +61,11 @@ class Solution {
 
         while(l<r){
 
-            while(!Character.isLetterOrDigit(s.charAt(l))){
+            while(l<r && !Character.isLetterOrDigit(s.charAt(l))){
                 l++;
             }
 
-            while(!Character.isLetterOrDigit(s.charAt(r))){
+            while(l<r && !Character.isLetterOrDigit(s.charAt(r))){
                 r--;
             }
 
