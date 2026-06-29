@@ -58,9 +58,9 @@ Explanation: Each of the patterns appears as a substring in word "ab".
 ## Solution
 
 **Language:** Java  
-**Runtime:** 0 ms  
-**Memory:** 42.5 MB  
-**Submitted:** 2026-06-29T16:27:21.137Z  
+**Runtime:** 1 ms (beats 75.75%)  
+**Memory:** 43.2 MB (beats 74.57%)  
+**Submitted:** 2026-06-29T16:27:35.078Z  
 
 ```java
 class Solution {
