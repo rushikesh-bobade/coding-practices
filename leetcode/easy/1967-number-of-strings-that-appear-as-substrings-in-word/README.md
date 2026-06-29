@@ -58,21 +58,20 @@ Explanation: Each of the patterns appears as a substring in word "ab".
 ## Solution
 
 **Language:** Java  
-**Runtime:** 1 ms (beats 75.75%)  
-**Memory:** 43.3 MB (beats 56.03%)  
-**Submitted:** 2026-06-29T08:10:11.850Z  
+**Runtime:** 0 ms  
+**Memory:** 42.5 MB  
+**Submitted:** 2026-06-29T16:27:21.137Z  
 
 ```java
 class Solution {
     public int numOfStrings(String[] patterns, String word) {
-        int count = 0;
+        int count=0;
 
-        for (String pattern : patterns) {
-            if (word.contains(pattern)) {
+        for(String pattern:patterns){
+            if(word.contains(pattern)){
                 count++;
             }
         }
-
         return count;
     }
 }
