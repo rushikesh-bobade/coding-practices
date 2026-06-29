@@ -52,15 +52,17 @@ Explanation: The only possible triplet sums up to 0.
 ## Solution
 
 **Language:** Java  
-**Runtime:** 0 ms  
-**Memory:** 42.7 MB  
-**Submitted:** 2026-06-29T16:15:59.721Z  
+**Runtime:** 1 ms  
+**Memory:** 42.8 MB  
+**Submitted:** 2026-06-29T16:17:50.374Z  
 
 ```java
 class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
        
         List<List<Integer>>ans=new ArrayList<>();
+        
+        Arrays.sort(nums);
 
         for(int i=0;i<nums.length;i++){
 
