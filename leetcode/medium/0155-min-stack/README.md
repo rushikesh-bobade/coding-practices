@@ -52,36 +52,36 @@ minStack.getMin(); // return -2
 
 **Language:** Java  
 **Runtime:** 0 ms  
-**Memory:** 42.3 MB  
-**Submitted:** 2026-06-29T21:11:58.996Z  
+**Memory:** 42.2 MB  
+**Submitted:** 2026-06-30T20:23:16.105Z  
 
 ```java
 class MinStack {
 
-    private Stack<Integer> stack;
-    private Stack<Integer> minStack;
+    private Stack<Integer>st;
+    private Stack<Integer>minStack;
 
     public MinStack() {
-        stack = new Stack<>();
-        minStack = new Stack<>();
+        st=new Stack<>();
+        minStack=new Stack<>();
     }
     
-    public void push(int val) {
-        stack.push(val);
-        if (minStack.isEmpty()) {
-            minStack.push(val);
-        } else {
-            minStack.push(Math.min(val, minStack.peek()));
+    public void push(int value) {
+        st.push(value);
+        if(minStack.isEmpty()){
+            minStack.push(value);
+        }else{
+            minStack.push(Math.min(minStack.peek(),value));
         }
     }
     
     public void pop() {
-        stack.pop();
+        st.pop();
         minStack.pop();
     }
     
     public int top() {
-        return stack.peek();
+        return st.peek();
     }
     
     public int getMin() {
@@ -89,6 +89,14 @@ class MinStack {
     }
 }
 
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack obj = new MinStack();
+ * obj.push(value);
+ * obj.pop();
+ * int param_3 = obj.top();
+ * int param_4 = obj.getMin();
+ */
 ```
 
 ---
