@@ -51,9 +51,9 @@ minStack.getMin(); // return -2
 ## Solution
 
 **Language:** Java  
-**Runtime:** 0 ms  
-**Memory:** 42.2 MB  
-**Submitted:** 2026-06-30T20:23:16.105Z  
+**Runtime:** 39 ms (beats 6.49%)  
+**Memory:** 99.7 MB (beats 41.16%)  
+**Submitted:** 2026-06-30T20:23:22.387Z  
 
 ```java
 class MinStack {
