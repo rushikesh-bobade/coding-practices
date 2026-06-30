@@ -46,9 +46,9 @@ Output: 1
 ## Solution
 
 **Language:** Java  
-**Runtime:** 12 ms (beats 84.52%)  
-**Memory:** 46.1 MB (beats 78.62%)  
-**Submitted:** 2026-06-30T19:02:05.210Z  
+**Runtime:** 0 ms  
+**Memory:** 42.6 MB  
+**Submitted:** 2026-06-30T19:02:44.532Z  
 
 ```java
 class Solution {
@@ -64,6 +64,31 @@ class Solution {
         return ans;
     }
 }
+
+
+/*
+class Solution {
+    public int numberOfSubstrings(String s) {
+        int n = s.length();
+        int[] freq = new int[3];
+
+        int left = 0;
+        int ans = 0;
+
+        for (int right = 0; right < n; right++) {
+            freq[s.charAt(right) - 'a']++;
+
+            while (freq[0] > 0 && freq[1] > 0 && freq[2] > 0) {
+                ans += (n - right);
+                freq[s.charAt(left) - 'a']--;
+                left++;
+            }
+        }
+
+        return ans;
+    }
+}
+*/
 ```
 
 ---
