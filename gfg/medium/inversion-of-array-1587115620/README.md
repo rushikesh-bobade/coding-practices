@@ -33,65 +33,55 @@ Explanation: As all the elements of array are same, so there is no inversion cou
 
 ## Solution
 
-**Language:** JavaScript  
+**Language:** c(gcc5.4)  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-07-09T13:02:20.589Z  
+**Submitted:** 2026-07-09T13:03:30.904Z  
 
-```js
-/**
- * @param {number[]} arr
- * @returns {number}
- */
+```c(gcc5.4)
+int merge(int arr[], int left, int mid, int right) {
+    int temp[right - left + 1];
+    int i = left, j = mid + 1, k = 0;
+    int inv = 0;
 
-class Solution {
-    inversionCount(arr) {
-        return this.mergeSort(arr, 0, arr.length - 1);
+    while (i <= mid && j <= right) {
+        if (arr[i] <= arr[j]) {
+            temp[k++] = arr[i++];
+        } else {
+            temp[k++] = arr[j++];
+            inv += (mid - i + 1);
+        }
     }
 
-    mergeSort(arr, left, right) {
-        let count = 0;
+    while (i <= mid)
+        temp[k++] = arr[i++];
 
-        if (left < right) {
-            const mid = Math.floor((left + right) / 2);
+    while (j <= right)
+        temp[k++] = arr[j++];
 
-            count += this.mergeSort(arr, left, mid);
-            count += this.mergeSort(arr, mid + 1, right);
-            count += this.merge(arr, left, mid, right);
-        }
+    for (i = left, k = 0; i <= right; i++, k++)
+        arr[i] = temp[k];
 
-        return count;
+    return inv;
+}
+
+int mergeSort(int arr[], int left, int right) {
+    int count = 0;
+
+    if (left < right) {
+        int mid = left + (right - left) / 2;
+
+        count += mergeSort(arr, left, mid);
+        count += mergeSort(arr, mid + 1, right);
+        count += merge(arr, left, mid, right);
     }
 
-    merge(arr, left, mid, right) {
-        const temp = [];
-        let i = left;
-        let j = mid + 1;
-        let inv = 0;
+    return count;
+}
 
-        while (i <= mid && j <= right) {
-            if (arr[i] <= arr[j]) {
-                temp.push(arr[i++]);
-            } else {
-                temp.push(arr[j++]);
-                inv += (mid - i + 1);
-            }
-        }
-
-        while (i <= mid) {
-            temp.push(arr[i++]);
-        }
-
-        while (j <= right) {
-            temp.push(arr[j++]);
-        }
-
-        for (let k = 0; k < temp.length; k++) {
-            arr[left + k] = temp[k];
-        }
-
-        return inv;
-    }
+// Function to count inversions in the array
+int countInversions(int arr[], int n) {
+    return mergeSort(arr, 0, n - 1);
 }
 ```
 
