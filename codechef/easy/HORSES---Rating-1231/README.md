@@ -50,44 +50,41 @@ The minimum difference can be achieved if we pick horses with skills 1 and 4 for
 
 ## Solution
 
-**Language:** Go  
+**Language:** c_cpp  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-07-09T13:04:22.727Z  
+**Submitted:** 2026-07-09T13:06:07.504Z  
 
-```go
-package main
+```c_cpp
+#include <bits/stdc++.h>
+using namespace std;
 
-import (
-	"fmt"
-	"sort"
-)
+int main() {
+    int t;
+    cin >> t;
 
-func main() {
-	var T int
-	fmt.Scan(&T)
+    while (t--) {
+        int n;
+        cin >> n;
 
-	for ; T > 0; T-- {
-		var N int
-		fmt.Scan(&N)
+        long s[n];
 
-		arr := make([]int, N)
-		for i := 0; i < N; i++ {
-			fmt.Scan(&arr[i])
-		}
+        for (int i = 0; i < n; i++) {
+            cin >> s[i];
+        }
 
-		sort.Ints(arr)
+        sort(s, s + n);
 
-		minDiff := arr[1] - arr[0]
-		for i := 1; i < N-1; i++ {
-			diff := arr[i+1] - arr[i]
-			if diff < minDiff {
-				minDiff = diff
-			}
-		}
+        long ans = LONG_MAX;
 
-		fmt.Println(minDiff)
-	}
+        for (int i = 1; i < n; i++) {
+            ans = min(ans, s[i] - s[i - 1]);
+        }
+
+        cout << ans << endl;
+    }
+
+    return 0;
 }
 ```
 
