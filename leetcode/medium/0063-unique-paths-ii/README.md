@@ -45,34 +45,37 @@ Output: 1
 
 ## Solution
 
-**Language:** TypeScript  
-**Runtime:** 0 ms (beats 100.00%)  
-**Memory:** 55.3 MB (beats 78.89%)  
-**Submitted:** 2026-07-09T13:20:28.010Z  
+**Language:** Go  
+**Runtime:** 0 ms  
+**Memory:** 3.9 MB  
+**Submitted:** 2026-07-09T13:21:01.302Z  
 
-```ts
-function uniquePathsWithObstacles(obstacleGrid: number[][]): number {
-    const m = obstacleGrid.length;
-    const n = obstacleGrid[0].length;
+```go
+func uniquePathsWithObstacles(obstacleGrid [][]int) int {
+    m := len(obstacleGrid)
+    n := len(obstacleGrid[0])
 
-    const dp: number[] = new Array(n).fill(0);
+    dp := make([]int, n)
 
-    // Starting point
-    dp[0] = obstacleGrid[0][0] === 1 ? 0 : 1;
+    // Starting position
+    if obstacleGrid[0][0] == 1 {
+        return 0
+    }
+    dp[0] = 1
 
-    for (let i = 0; i < m; i++) {
-        for (let j = 0; j < n; j++) {
-            // If current cell is an obstacle, no path can pass through it
-            if (obstacleGrid[i][j] === 1) {
-                dp[j] = 0;
-            } else if (j > 0) {
-                // Add paths from the left cell
-                dp[j] += dp[j - 1];
+    for i := 0; i < m; i++ {
+        for j := 0; j < n; j++ {
+            // Obstacle blocks all paths through this cell
+            if obstacleGrid[i][j] == 1 {
+                dp[j] = 0
+            } else if j > 0 {
+                // Paths from top (dp[j]) + left (dp[j-1])
+                dp[j] += dp[j-1]
             }
         }
     }
 
-    return dp[n - 1];
+    return dp[n-1]
 }
 ```
 
