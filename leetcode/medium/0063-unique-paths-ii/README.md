@@ -45,37 +45,41 @@ Output: 1
 
 ## Solution
 
-**Language:** Go  
-**Runtime:** 0 ms  
-**Memory:** 3.9 MB  
-**Submitted:** 2026-07-09T13:21:01.302Z  
+**Language:** Java  
+**Runtime:** 0 ms (beats 100.00%)  
+**Memory:** 43.4 MB (beats 64.03%)  
+**Submitted:** 2026-07-09T13:22:02.126Z  
 
-```go
-func uniquePathsWithObstacles(obstacleGrid [][]int) int {
-    m := len(obstacleGrid)
-    n := len(obstacleGrid[0])
+```java
+class Solution {
+    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+        int m = obstacleGrid.length;
+        int n = obstacleGrid[0].length;
 
-    dp := make([]int, n)
+        int[] dp = new int[n];
 
-    // Starting position
-    if obstacleGrid[0][0] == 1 {
-        return 0
-    }
-    dp[0] = 1
+        // Starting cell
+        if (obstacleGrid[0][0] == 1) {
+            return 0;
+        }
 
-    for i := 0; i < m; i++ {
-        for j := 0; j < n; j++ {
-            // Obstacle blocks all paths through this cell
-            if obstacleGrid[i][j] == 1 {
-                dp[j] = 0
-            } else if j > 0 {
-                // Paths from top (dp[j]) + left (dp[j-1])
-                dp[j] += dp[j-1]
+        dp[0] = 1;
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                // Obstacle blocks all paths
+                if (obstacleGrid[i][j] == 1) {
+                    dp[j] = 0;
+                } 
+                // Add paths from the left cell
+                else if (j > 0) {
+                    dp[j] += dp[j - 1];
+                }
             }
         }
-    }
 
-    return dp[n-1]
+        return dp[n - 1];
+    }
 }
 ```
 
