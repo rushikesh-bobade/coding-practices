@@ -50,45 +50,44 @@ The minimum difference can be achieved if we pick horses with skills 1 and 4 for
 
 ## Solution
 
-**Language:** Java  
+**Language:** Go  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-07-09T13:04:52.205Z  
+**Submitted:** 2026-07-09T13:04:26.695Z  
 
-```java
-import java.util.*;
+```go
+package main
 
-public class Main {
+import (
+	"fmt"
+	"sort"
+)
 
-    public static void main(String[] args) {
+func main() {
+	var T int
+	fmt.Scan(&T)
 
-        Scanner scanner = new Scanner(System.in);
+	for ; T > 0; T-- {
+		var N int
+		fmt.Scan(&N)
 
-        int t = scanner.nextInt();
+		arr := make([]int, N)
+		for i := 0; i < N; i++ {
+			fmt.Scan(&arr[i])
+		}
 
-        while (t-- > 0) {
+		sort.Ints(arr)
 
-            int n = scanner.nextInt();
+		minDiff := arr[1] - arr[0]
+		for i := 1; i < N-1; i++ {
+			diff := arr[i+1] - arr[i]
+			if diff < minDiff {
+				minDiff = diff
+			}
+		}
 
-            long[] s = new long[n];
-
-            for (int i = 0; i < n; i++) {
-                s[i] = scanner.nextLong();
-            }
-
-            Arrays.sort(s);
-
-            long minDiff = Long.MAX_VALUE;
-
-            for (int i = 1; i < n; i++) {
-                minDiff = Math.min(minDiff, s[i] - s[i - 1]);
-            }
-
-            System.out.println(minDiff);
-        }
-
-        scanner.close();
-    }
+		fmt.Println(minDiff)
+	}
 }
 ```
 
