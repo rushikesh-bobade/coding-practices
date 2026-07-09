@@ -33,58 +33,61 @@ Explanation: As all the elements of array are same, so there is no inversion cou
 
 ## Solution
 
-**Language:** Java  
+**Language:** JavaScript  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-07-09T13:01:53.451Z  
+**Submitted:** 2026-07-09T13:02:20.589Z  
 
-```java
+```js
+/**
+ * @param {number[]} arr
+ * @returns {number}
+ */
+
 class Solution {
-    static int inversionCount(int arr[]) {
-        return mergeSort(arr, 0, arr.length - 1);
+    inversionCount(arr) {
+        return this.mergeSort(arr, 0, arr.length - 1);
     }
 
-    static int mergeSort(int[] arr, int left, int right) {
-        int count = 0;
+    mergeSort(arr, left, right) {
+        let count = 0;
 
         if (left < right) {
-            int mid = left + (right - left) / 2;
+            const mid = Math.floor((left + right) / 2);
 
-            count += mergeSort(arr, left, mid);
-            count += mergeSort(arr, mid + 1, right);
-            count += merge(arr, left, mid, right);
+            count += this.mergeSort(arr, left, mid);
+            count += this.mergeSort(arr, mid + 1, right);
+            count += this.merge(arr, left, mid, right);
         }
 
         return count;
     }
 
-    static int merge(int[] arr, int left, int mid, int right) {
-        int[] temp = new int[right - left + 1];
-
-        int i = left;
-        int j = mid + 1;
-        int k = 0;
-        int inv = 0;
+    merge(arr, left, mid, right) {
+        const temp = [];
+        let i = left;
+        let j = mid + 1;
+        let inv = 0;
 
         while (i <= mid && j <= right) {
             if (arr[i] <= arr[j]) {
-                temp[k++] = arr[i++];
+                temp.push(arr[i++]);
             } else {
-                temp[k++] = arr[j++];
+                temp.push(arr[j++]);
                 inv += (mid - i + 1);
             }
         }
 
         while (i <= mid) {
-            temp[k++] = arr[i++];
+            temp.push(arr[i++]);
         }
 
         while (j <= right) {
-            temp[k++] = arr[j++];
+            temp.push(arr[j++]);
         }
 
-        for (i = left, k = 0; i <= right; i++, k++) {
-            arr[i] = temp[k];
+        for (let k = 0; k < temp.length; k++) {
+            arr[left + k] = temp[k];
         }
 
         return inv;
