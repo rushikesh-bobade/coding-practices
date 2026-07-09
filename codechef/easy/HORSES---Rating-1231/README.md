@@ -53,7 +53,7 @@ The minimum difference can be achieved if we pick horses with skills 1 and 4 for
 **Language:** Go  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-07-09T13:04:10.887Z  
+**Submitted:** 2026-07-09T13:04:22.727Z  
 
 ```go
 package main
