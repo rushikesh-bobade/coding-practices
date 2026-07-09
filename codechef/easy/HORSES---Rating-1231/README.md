@@ -50,41 +50,45 @@ The minimum difference can be achieved if we pick horses with skills 1 and 4 for
 
 ## Solution
 
-**Language:** c_cpp  
+**Language:** Java  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-07-09T13:06:07.504Z  
+**Submitted:** 2026-07-09T13:04:52.205Z  
 
-```c_cpp
-#include <bits/stdc++.h>
-using namespace std;
+```java
+import java.util.*;
 
-int main() {
-    int t;
-    cin >> t;
+public class Main {
 
-    while (t--) {
-        int n;
-        cin >> n;
+    public static void main(String[] args) {
 
-        long s[n];
+        Scanner scanner = new Scanner(System.in);
 
-        for (int i = 0; i < n; i++) {
-            cin >> s[i];
+        int t = scanner.nextInt();
+
+        while (t-- > 0) {
+
+            int n = scanner.nextInt();
+
+            long[] s = new long[n];
+
+            for (int i = 0; i < n; i++) {
+                s[i] = scanner.nextLong();
+            }
+
+            Arrays.sort(s);
+
+            long minDiff = Long.MAX_VALUE;
+
+            for (int i = 1; i < n; i++) {
+                minDiff = Math.min(minDiff, s[i] - s[i - 1]);
+            }
+
+            System.out.println(minDiff);
         }
 
-        sort(s, s + n);
-
-        long ans = LONG_MAX;
-
-        for (int i = 1; i < n; i++) {
-            ans = min(ans, s[i] - s[i - 1]);
-        }
-
-        cout << ans << endl;
+        scanner.close();
     }
-
-    return 0;
 }
 ```
 
