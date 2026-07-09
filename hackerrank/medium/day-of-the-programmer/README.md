@@ -39,22 +39,37 @@ Print the full date of *Day of the Programmer* during year $y$ in the format `dd
 
 ## Solution
 
-**Language:** Go  
+**Language:** TypeScript  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-07-09T13:17:00.167Z  
+**Submitted:** 2026-07-09T13:18:03.510Z  
 
-```go
-package main
+```ts
+'use strict';
 
-import (
-    "bufio"
-    "fmt"
-    "io"
-    "os"
-    "strconv"
-    "strings"
-)
+import { WriteStream, createWriteStream } from "fs";
+
+process.stdin.resume();
+process.stdin.setEncoding('utf-8');
+
+let inputString: string = '';
+let inputLines: string[] = [];
+let currentLine: number = 0;
+
+process.stdin.on('data', function(inputStdin: string): void {
+    inputString += inputStdin;
+});
+
+process.stdin.on('end', function(): void {
+    inputLines = inputString.split('\n');
+    inputString = '';
+
+    main();
+});
+
+function readLine(): string {
+    return inputLines[currentLine++];
+}
 
 /*
  * Complete the 'dayOfProgrammer' function below.
@@ -63,69 +78,39 @@ import (
  * The function accepts INTEGER year as parameter.
  */
 
-func dayOfProgrammer(year int32) string {
-    if year == 1918 {
-        // Calendar transition year
-        return "26.09.1918"
+function dayOfProgrammer(year: number): string {
+    if (year === 1918) {
+        // Special case: transition from Julian to Gregorian calendar
+        return "26.09.1918";
     }
 
-    leap := false
+    let isLeap: boolean = false;
 
-    if year < 1918 {
+    if (year < 1918) {
         // Julian calendar
-        if year%4 == 0 {
-            leap = true
-        }
+        isLeap = year % 4 === 0;
     } else {
         // Gregorian calendar
-        if year%400 == 0 || (year%4 == 0 && year%100 != 0) {
-            leap = true
-        }
+        isLeap = (year % 400 === 0) || (year % 4 === 0 && year % 100 !== 0);
     }
 
-    if leap {
-        return fmt.Sprintf("12.09.%04d", year)
+    if (isLeap) {
+        return `12.09.${year}`;
+    } else {
+        return `13.09.${year}`;
     }
-
-    return fmt.Sprintf("13.09.%04d", year)
 }
 
-func main() {
-    reader := bufio.NewReaderSize(os.Stdin, 16*1024*1024)
+function main() {
+    const ws: WriteStream = createWriteStream(process.env['OUTPUT_PATH']);
 
-    stdout, err := os.Create(os.Getenv("OUTPUT_PATH"))
-    checkError(err)
+    const year: number = parseInt(readLine().trim(), 10);
 
-    defer stdout.Close()
+    const result: string = dayOfProgrammer(year);
 
-    writer := bufio.NewWriterSize(stdout, 16*1024*1024)
+    ws.write(result + '\n');
 
-    yearTemp, err := strconv.ParseInt(strings.TrimSpace(readLine(reader)), 10, 64)
-    checkError(err)
-
-    year := int32(yearTemp)
-
-    result := dayOfProgrammer(year)
-
-    fmt.Fprintf(writer, "%s\n", result)
-
-    writer.Flush()
-}
-
-func readLine(reader *bufio.Reader) string {
-    str, _, err := reader.ReadLine()
-
-    if err == io.EOF {
-        return ""
-    }
-
-    return strings.TrimRight(string(str), "\r\n")
-}
-
-func checkError(err error) {
-    if err != nil {
-        panic(err)
-    }
+    ws.end();
 }
 
 ```
