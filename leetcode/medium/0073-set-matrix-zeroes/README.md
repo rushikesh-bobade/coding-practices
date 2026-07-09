@@ -47,41 +47,77 @@ Output: [[0,0,0,0],[0,4,5,0],[0,3,1,0]]
 
 **Language:** Java  
 **Runtime:** 1 ms (beats 98.56%)  
-**Memory:** 47.4 MB (beats 80.65%)  
-**Submitted:** 2026-07-09T10:49:46.595Z  
+**Memory:** 47.8 MB (beats 25.45%)  
+**Submitted:** 2026-07-09T14:04:45.187Z  
 
 ```java
 class Solution{
     public void setZeroes(int [][] matrix){
         int m=matrix.length;
         int n=matrix[0].length;
-        
-        boolean row[]=new boolean[m];
-        boolean col[]=new boolean[n];
 
+
+        int col0=1;
         for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
                 if(matrix[i][j]==0){
-                    row[i]=true;
-                    col[j]=true;
+                    matrix[i][0]=0;
+
+                    if(j!=0){
+                    matrix[0][j]=0;
+                    }else{
+                        col0=0;
+                    }
                 }
             }
         }
 
-        for(int i=0;i<m;i++){
-            for(int j=0;j<n;j++){
-                if( row[i]==true || col[j]==true){
+        for(int i=1;i<m;i++){
+            for(int j=1;j<n;j++){
+                if(matrix[i][0]==0 || matrix[0][j]==0){
                     matrix[i][j]=0;
                 }
             }
         }
+
+        if(matrix[0][0]==0){
+            for(int j=0;j<n;j++) matrix[0][j]=0;
+        }
+
+        if(col0==0){
+            for(int i=0;i<m;i++) matrix[i][0]=0;
+        }
+
     }
-}
+}        
+
+        // TC= O(2*n*m) but SC= O(n)+o(m)
+//         boolean row[]=new boolean[m];
+//         boolean col[]=new boolean[n];
+
+//         for(int i=0;i<m;i++){
+//             for(int j=0;j<n;j++){
+//                 if(matrix[i][j]==0){
+//                     row[i]=true;
+//                     col[j]=true;
+//                 }
+//             }
+//         }
+
+//         for(int i=0;i<m;i++){
+//             for(int j=0;j<n;j++){
+//                 if( row[i]==true || col[j]==true){
+//                     matrix[i][j]=0;
+//                 }
+//             }
+//         }
+//     }
+// }
 
 
 
 
-
+//
 // class Solution {
 //     public void setZeroes(int[][] matrix) {
 //             int rows = matrix.length;
@@ -139,31 +175,8 @@ class Solution{
 //         }
 //     }  
 
-//             // public void setZeroes(int[][] matrix) {
-//     //     // better way
-//     //     int[] col = new int[matrix[0].length];
-//     //     int[] row = new int[matrix.length];
 
-//     //     for(int i=0;i<matrix.length;i++){
-//     //         for(int j=0;j<matrix[0].length;j++){
-//     //             if(matrix[i][j]==0){
-//     //                 row[i] = 1;
-//     //                 col[j] = 1;
-//     //             }
-//     //         }
-//     //     }
-//     //     for(int i=0;i<matrix.length;i++){
-//     //         for(int j=0;j<matrix[0].length;j++){
-//     //             if(row[i] == 1|| col[j] == 1){
-//     //                 matrix[i][j] = 0;
-//     //             }
-//     //         }
-//     //     }
-
-        
-//     // }
-
-
+// here we have optimized that space
 //     // optimized approach
 //         // int col0 = 1;
 
