@@ -46,43 +46,72 @@ Explanation: Intervals [1,4] and [4,7] are considered overlapping.
 ## Solution
 
 **Language:** Java  
-**Runtime:** 13 ms (beats 6.10%)  
-**Memory:** 49.3 MB (beats 14.56%)  
-**Submitted:** 2026-07-15T10:58:48.626Z  
+**Runtime:** 12 ms (beats 9.93%)  
+**Memory:** 49 MB (beats 74.90%)  
+**Submitted:** 2026-07-15T12:14:59.564Z  
 
 ```java
 class Solution {
     public int[][] merge(int[][] intervals) {
-        Arrays.sort(intervals,Comparator.comparingDouble(o->o[0]));
+//More optimal
 
-        int ans[][]=new int[intervals.length][2];
-        int row=0;
+    List<int[]>list=new ArrayList<>();
 
-        int start=intervals[0][0];
-        int lastend=intervals[0][1];
+    Arrays.sort(intervals,Comparator.comparingInt(o->o[0]));
 
-        for(int i=1;i<intervals.length;i++){
+    int row=0;
+    int start=intervals[0][0];
+    int lastend=intervals[0][1];
 
-            if(intervals[i][0]<=lastend){
-                lastend=Math.max(lastend,intervals[i][1]);
-            }else{ 
-                ans[row][0]=start;
-                ans[row][1]=lastend;
-                row++;
-
-                start=intervals[i][0];
-                lastend=intervals[i][1];
-            }
-
+    for(int i=1;i<intervals.length;i++){
+        if(intervals[i][0]<=lastend){
+            lastend=Math.max(lastend,intervals[i][1]);
+        }else{
+            list.add(new int []{start,lastend});
+            start=intervals[i][0];
+            lastend=intervals[i][1];
         }
+    }
 
-    // Save the last interval
-        ans[row][0]=start;
-        ans[row][1]=lastend;
-        row++;
+    list.add(new int[]{start,lastend});
+
+return list.toArray(new int[0][]);
+
+
+
+
+
+            // less optimal
+    //     Arrays.sort(intervals,Comparator.comparingDouble(o->o[0]));
+
+    //     int ans[][]=new int[intervals.length][2];
+    //     int row=0;
+
+    //     int start=intervals[0][0];
+    //     int lastend=intervals[0][1];
+
+    //     for(int i=1;i<intervals.length;i++){
+
+    //         if(intervals[i][0]<=lastend){
+    //             lastend=Math.max(lastend,intervals[i][1]);
+    //         }else{ 
+    //             ans[row][0]=start;
+    //             ans[row][1]=lastend;
+    //             row++;
+
+    //             start=intervals[i][0];
+    //             lastend=intervals[i][1];
+    //         }
+
+    //     }
+
+    // // Save the last interval
+    //     ans[row][0]=start;
+    //     ans[row][1]=lastend;
+    //     row++;
         
 
-    return Arrays.copyOf(ans, row);
+    // return Arrays.copyOf(ans, row);
     }
 }
 ```
