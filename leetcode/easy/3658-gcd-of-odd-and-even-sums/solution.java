@@ -1,18 +1,24 @@
 class Solution {
     public int gcdOfOddEvenSums(int n) {
-        int sumOdd=0;
-        int sumEven=0;
-        int na=2*n;
-        int i=1;
-        while(na>0){
-            if(i%2!=0){
-                sumOdd+=i;
-            }else{
-                sumEven+=i;
-            }
-            i++;
-            na--;
-        }
+        //more ooptimal
+        int sumOdd=n*n;
+        int sumEven=n*(n+1);
+
+
+        //less optimal
+        // int sumOdd=0;
+        // int sumEven=0;
+        // int na=2*n;
+        // int i=1;
+        // while(na>0){
+        //     if(i%2!=0){
+        //         sumOdd+=i;
+        //     }else{
+        //         sumEven+=i;
+        //     }
+        //     i++;
+        //     na--;
+        // }
 
         return gcd(sumOdd,sumEven);
     }
