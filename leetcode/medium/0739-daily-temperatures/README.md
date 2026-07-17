@@ -41,32 +41,23 @@ Output: [1,1,0]
 
 ## Solution
 
-**Language:** Java  
-**Runtime:** 63 ms (beats 50.41%)  
-**Memory:** 107.7 MB (beats 23.23%)  
-**Submitted:** 2026-07-17T12:44:48.270Z  
+**Language:** Python  
+**Runtime:** 123 ms (beats 19.71%)  
+**Memory:** 35.9 MB (beats 8.97%)  
+**Submitted:** 2026-07-17T12:57:55.256Z  
 
-```java
-class Solution {
-    public int[] dailyTemperatures(int[] temperatures) {
-        int n=temperatures.length;
-        int result[]=new int[n];
+```py
+class Solution:
+    def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
+        res=[0]*len(temperatures)
+        stack=[] #pair:[temp,index]
 
-        Stack<Integer>st=new Stack<>();
-
-        for(int i=0;i<n;i++){
-
-            while(!st.isEmpty() && temperatures[i]>temperatures[st.peek()]){
-                int idx=st.pop();
-                result[idx]=i-idx;
-            }
-            st.push(i);
-        }
-
-
-        return result;
-    }
-}
+        for i,t in enumerate(temperatures):
+            while stack and t>stack[-1][0]:
+                stackT,stackInd=stack.pop()
+                res[stackInd]=(i-stackInd)
+            stack.append([t,i])
+        return res
 ```
 
 ---
