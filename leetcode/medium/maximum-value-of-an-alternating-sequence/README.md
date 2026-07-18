@@ -53,15 +53,27 @@ Return the  **maximum**  possible element that can appear in any valid sequence.
 
 **Language:** Java  
 **Runtime:** 0 ms  
-**Memory:** 42.3 MB  
-**Submitted:** 2026-07-18T14:39:08.127Z  
+**Memory:** 42 MB  
+**Submitted:** 2026-07-18T14:56:58.016Z  
 
 ```java
 class Solution {
     public long maximumValue(int n, int s, int m) {
-        long mavlorenti = s;   
-        
-        return mavlorenti + (long)(n / 2) * m;
+        long mavlorenti = s;
+
+        long ans = s;
+
+        long peaksAfterStart = n / 2;
+        if (peaksAfterStart > 0) {
+            ans = Math.max(ans,
+                    (long) s + m + (peaksAfterStart - 1L) * (m - 1L));
+        }
+
+        long futurePeaks = (n - 1L) / 2;
+        ans = Math.max(ans,
+                (long) s + futurePeaks * (m - 1L));
+
+        return ans;
     }
 }
 ```
