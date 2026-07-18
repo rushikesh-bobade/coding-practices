@@ -84,9 +84,9 @@ No sequence of rule applications can transform `source` into `target`, so the an
 ## Solution
 
 **Language:** Java  
-**Runtime:** 179 ms  
-**Memory:** 88 MB  
-**Submitted:** 2026-07-18T14:43:35.560Z  
+**Runtime:** 186 ms  
+**Memory:** 87.8 MB  
+**Submitted:** 2026-07-18T14:56:35.557Z  
 
 ```java
 class Solution {
@@ -99,7 +99,6 @@ class Solution {
         List<int[]>[] start = new ArrayList[n];
         for (int i = 0; i < n; i++) start[i] = new ArrayList<>();
 
-        // Build all valid intervals
         for (int r = 0; r < rules.size(); r++) {
             String pattern = rules.get(r).get(0);
             String repl = rules.get(r).get(1);
@@ -144,7 +143,6 @@ class Solution {
                 dp[i] = dp[i + 1];
             }
 
-            // Apply any rule starting here
             for (int[] e : start[i]) {
                 dp[i] = Math.min(dp[i], e[1] + dp[e[0]]);
             }
