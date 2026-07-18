@@ -59,36 +59,32 @@ Note that because m = 0, there are no elements in nums1. The 0 is only there to 
 
 ## Solution
 
-**Language:** Java  
+**Language:** Python  
 **Runtime:** 0 ms (beats 100.00%)  
-**Memory:** 43.8 MB (beats 46.61%)  
-**Submitted:** 2026-07-18T10:29:09.556Z  
+**Memory:** 19.2 MB (beats 95.62%)  
+**Submitted:** 2026-07-18T10:47:32.691Z  
 
-```java
-class Solution {
-    public void merge(int[] nums1, int m, int[] nums2, int n) {
-       int i=m-1;
-       int j=n-1;
-       int k=m+n-1;
+```py
+class Solution:
+    def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
+        i=m-1
+        j=n-1
+        k=m+n-1
 
-       while(i>=0 && j>=0){
-            if(nums1[i]<nums2[j]){
-                nums1[k]=nums2[j];
-                j--;
-            }else{
-                nums1[k]=nums1[i];
-                i--;
-            }
-            k--;
-       }
+        while i>=0 and j>=0:
+            if nums1[i]>nums2[j]:
+                nums1[k]=nums1[i]
+                i-=1
+            else:
+                nums1[k]=nums2[j]
+                j-=1
+            k-=1
 
-       while(j>=0){
-        nums1[k]=nums2[j];
-        j--;
-        k--;
-       }
-    }
-}
+        while j>=0:
+            nums1[k]=nums2[j]
+            k-=1
+            j-=1
+
 ```
 
 ---
