@@ -8,7 +8,6 @@ class Solution {
         List<int[]>[] start = new ArrayList[n];
         for (int i = 0; i < n; i++) start[i] = new ArrayList<>();
 
-        // Build all valid intervals
         for (int r = 0; r < rules.size(); r++) {
             String pattern = rules.get(r).get(0);
             String repl = rules.get(r).get(1);
@@ -53,7 +52,6 @@ class Solution {
                 dp[i] = dp[i + 1];
             }
 
-            // Apply any rule starting here
             for (int[] e : start[i]) {
                 dp[i] = Math.min(dp[i], e[1] + dp[e[0]]);
             }
