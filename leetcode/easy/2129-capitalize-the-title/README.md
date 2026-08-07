@@ -56,39 +56,56 @@ The remaining words have a length of at least 3, so the first letter of each rem
 ## Solution
 
 **Language:** Java  
-**Runtime:** 6 ms (beats 36.42%)  
-**Memory:** 44.2 MB (beats 28.91%)  
-**Submitted:** 2026-08-07T14:37:00.604Z  
+**Runtime:** 3 ms (beats 80.13%)  
+**Memory:** 43.9 MB (beats 57.32%)  
+**Submitted:** 2026-08-07T14:45:53.918Z  
 
 ```java
 class Solution {
     public String capitalizeTitle(String title) {
-        
-        String s[]=title.trim().split("\\s+");
-        StringBuilder sb=new StringBuilder();
 
-        for(int i=0;i<s.length;i++){
-            boolean j=true;
+        String[] words = title.toLowerCase().split(" ");
+        StringBuilder sb = new StringBuilder();
 
-            for(char c : s[i].toCharArray()){
-                if(s[i].length()==1){
-                    sb.append(Character.toLowerCase(c));
-                }else if(s[i].length()==2){
-                    sb.append(Character.toLowerCase(c));
-                }else{
-                    if(j){
-                        sb.append(Character.toUpperCase(c));
-                    }else{
-                        sb.append(Character.toLowerCase(c));
-                    }
-                    j=false;
-                }
-           }
+        for (int i = 0; i < words.length; i++) {
+            if (i > 0) sb.append(" ");
 
-           sb.append(" ");
+            if (words[i].length() <= 2) {
+                sb.append(words[i]);
+            } else {
+                sb.append(Character.toUpperCase(words[i].charAt(0)));
+                sb.append(words[i].substring(1));
+            }
         }
 
-        return sb.toString().trim();
+        return sb.toString();
+    
+
+        // String s[]=title.trim().split("\\s+");
+        // StringBuilder sb=new StringBuilder();
+
+        // for(int i=0;i<s.length;i++){
+        //     boolean j=true;
+
+        //     for(char c : s[i].toCharArray()){
+        //         if(s[i].length()==1){
+        //             sb.append(Character.toLowerCase(c));
+        //         }else if(s[i].length()==2){
+        //             sb.append(Character.toLowerCase(c));
+        //         }else{
+        //             if(j){
+        //                 sb.append(Character.toUpperCase(c));
+        //             }else{
+        //                 sb.append(Character.toLowerCase(c));
+        //             }
+        //             j=false;
+        //         }
+        //    }
+
+        //    sb.append(" ");
+        // }
+
+        // return sb.toString().trim();
     }
 }
 ```
