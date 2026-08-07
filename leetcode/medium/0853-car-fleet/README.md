@@ -65,9 +65,9 @@ There is only one car, hence there is only one fleet.
 ## Solution
 
 **Language:** Java  
-**Runtime:** 100 ms (beats 17.19%)  
-**Memory:** 95.5 MB (beats 84.30%)  
-**Submitted:** 2026-08-07T19:29:20.486Z  
+**Runtime:** 90 ms (beats 26.65%)  
+**Memory:** 99.8 MB (beats 39.36%)  
+**Submitted:** 2026-08-07T19:44:12.069Z  
 
 ```java
 import java.io.*;
@@ -85,18 +85,21 @@ class Solution {
             cars[i][1]=(double)(target-position[i])/speed[i]; // c1:2, c2:1, c3:12, c4:7, c5:3
         }
 
-        Arrays.sort(cars,Comparator.comparingDouble((double a[])->a[0]).reversed());// c1:1, c2:1, c4:7, c5:3, c3:12 that mean how much position they are closure in time to target
+        Arrays.sort(cars,(a,b)->Double.compare(b[0],a[0]));
+        //Arrays.sort(cars,Comparator.comparingDouble((double a[])->a[0]).reversed());// c1:1, c2:1, c4:7, c5:3, c3:12 that mean how much position they are closure in time to target
+
+        Stack<Double>st=new Stack<>();
 
         double prev=0;
       
         for(int i=0;i<n;i++){
-            if(cars[i][1]>prev){
-                count++;
+           if(st.isEmpty()||cars[i][1]>prev){
+                st.push(cars[i][1]);
                 prev=cars[i][1];
-            }
+           }
         }
 
-        return count;
+        return st.size();
 
     }
 }
