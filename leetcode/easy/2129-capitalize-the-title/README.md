@@ -56,23 +56,25 @@ The remaining words have a length of at least 3, so the first letter of each rem
 ## Solution
 
 **Language:** Java  
-**Runtime:** 3 ms (beats 80.13%)  
-**Memory:** 43.9 MB (beats 57.32%)  
-**Submitted:** 2026-08-07T14:45:53.918Z  
+**Runtime:** 7 ms (beats 18.73%)  
+**Memory:** 44.2 MB (beats 28.91%)  
+**Submitted:** 2026-08-07T15:25:01.651Z  
 
 ```java
 class Solution {
     public String capitalizeTitle(String title) {
 
-        String[] words = title.toLowerCase().split(" ");
-        StringBuilder sb = new StringBuilder();
+        String[] words=title.toLowerCase().split("\\s+");
+        StringBuilder sb=new StringBuilder();
 
-        for (int i = 0; i < words.length; i++) {
-            if (i > 0) sb.append(" ");
+        for(int i=0;i<words.length;i++){
+            if(i>0) {
+                sb.append(" ");
+                }
 
-            if (words[i].length() <= 2) {
+            if(words[i].length()<=2){
                 sb.append(words[i]);
-            } else {
+            }else{
                 sb.append(Character.toUpperCase(words[i].charAt(0)));
                 sb.append(words[i].substring(1));
             }
