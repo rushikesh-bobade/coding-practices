@@ -65,42 +65,33 @@ There is only one car, hence there is only one fleet.
 ## Solution
 
 **Language:** Java  
-**Runtime:** 90 ms (beats 26.65%)  
-**Memory:** 99.8 MB (beats 39.36%)  
-**Submitted:** 2026-08-07T19:44:12.069Z  
+**Runtime:** 82 ms (beats 56.38%)  
+**Memory:** 101.9 MB (beats 32.00%)  
+**Submitted:** 2026-08-07T19:45:18.729Z  
 
 ```java
-import java.io.*;
-import java.util.*;
-
 class Solution {
     public int carFleet(int target, int[] position, int[] speed) {
-        int n=position.length;
-        int count=0;
-
-        double[][] cars=new double [n][2];
-
-        for(int i=0;i<n;i++){
-            cars[i][0]=position[i];
-            cars[i][1]=(double)(target-position[i])/speed[i]; // c1:2, c2:1, c3:12, c4:7, c5:3
+        // paired cars with thier respective speeds
+        int[][] pair = new int[position.length][2];
+        for (int i = 0; i < position.length; i++) {
+            pair[i][0] = position[i];
+            pair[i][1] = speed[i];
         }
+        Arrays.sort(pair, (a, b) -> Integer.compare(b[0], a[0]));
 
-        Arrays.sort(cars,(a,b)->Double.compare(b[0],a[0]));
-        //Arrays.sort(cars,Comparator.comparingDouble((double a[])->a[0]).reversed());// c1:1, c2:1, c4:7, c5:3, c3:12 that mean how much position they are closure in time to target
-
-        Stack<Double>st=new Stack<>();
-
-        double prev=0;
-      
-        for(int i=0;i<n;i++){
-           if(st.isEmpty()||cars[i][1]>prev){
-                st.push(cars[i][1]);
-                prev=cars[i][1];
-           }
+        // calculating time for each
+        Stack<Double> stack = new Stack<>();
+        for (int[] p : pair) {
+            double time = (double) (target - p[0]) / p[1];
+            if (!stack.isEmpty() && time <= stack.peek()) {
+                continue;
+            }
+            stack.push(time);
         }
-
-        return st.size();
-
+        
+        //returning the number of fleets
+        return stack.size();
     }
 }
 ```
