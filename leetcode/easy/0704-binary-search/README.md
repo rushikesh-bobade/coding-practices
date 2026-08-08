@@ -40,9 +40,9 @@ Explanation: 2 does not exist in nums so return -1
 ## Solution
 
 **Language:** Java  
-**Runtime:** 0 ms  
-**Memory:** 42.5 MB  
-**Submitted:** 2026-08-08T20:05:08.588Z  
+**Runtime:** 0 ms (beats 100.00%)  
+**Memory:** 48.1 MB (beats 85.90%)  
+**Submitted:** 2026-08-08T20:05:15.307Z  
 
 ```java
 class Solution {
