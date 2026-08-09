@@ -57,9 +57,9 @@ Explanation: The original array was [11,13,15,17] and it was rotated 4 times.
 ## Solution
 
 **Language:** Java  
-**Runtime:** 0 ms  
-**Memory:** 42.8 MB  
-**Submitted:** 2026-08-09T21:49:56.768Z  
+**Runtime:** 0 ms (beats 100.00%)  
+**Memory:** 43.9 MB (beats 38.49%)  
+**Submitted:** 2026-08-09T21:56:36.902Z  
 
 ```java
 class Solution {
@@ -71,8 +71,10 @@ class Solution {
 
     while(left<=right){
         int mid=left+(right-left)/2;
-        if(nums[left]<nums[right]){
-            return left;
+
+        if(nums[left]<=nums[right]){
+            ans=Math.min(ans, nums[left]);
+            break;
         }
 
         if(nums[left]<=nums[mid]){
