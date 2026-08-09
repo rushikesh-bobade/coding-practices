@@ -49,66 +49,78 @@ Output: 23
 ## Solution
 
 **Language:** Java  
-**Runtime:** 7 ms (beats 82.01%)  
-**Memory:** 47.7 MB (beats 88.35%)  
-**Submitted:** 2026-08-09T20:25:27.154Z  
+**Runtime:** 26 ms (beats 14.63%)  
+**Memory:** 47.7 MB (beats 75.25%)  
+**Submitted:** 2026-08-09T20:54:24.489Z  
 
 ```java
-class Solution{
-    public int minEatingSpeed(int[] piles,int h){
-    int l=1;
-    int r=piles[0];
-    for(int i=1;i<piles.length;i++){
-        r=Math.max(r , piles[i]);
-    }
-
-    while(l<r){
-        int mid=l+(r-l)/2;
-        int hr=0;
-        for(int i=0;i<piles.length;i++){
-            hr+=(piles[i]+mid-1)/mid;// or  here mid is we considering as no.of bananas
-        }
-        if(hr<=h){
-            r=mid;
-        }else{
-            l=mid+1;
-        }
-    }
-     
-    return l;
-    }
-}
-
-
-
-
-
-// class Solution {
-//     public int minEatingSpeed(int[] piles, int h) {
-//         int left = 1;
-//         int right = 0;
-//         for (int pile : piles) right = Math.max(right, pile);
-
-//         // Time Complexity: O(n log m)
-//         while (left < right) {
-//             int mid = left + (right - left) / 2;
-//             if (canEatAll(piles, h, mid)) right = mid;
-//             else left = mid + 1;
-//         }
-
-//         return left;
+// class Solution{
+//     public int minEatingSpeed(int[] piles,int h){
+//     int l=1;
+//     int r=piles[0];
+    
+//     for(int i=1;i<piles.length;i++){
+//         r=Math.max(r , piles[i]);
 //     }
 
-//     private boolean canEatAll(int[] piles, int h, int speed) {
-//         int hours = 0;
-//         for (int pile : piles) {
-//             hours += (pile + speed - 1) / speed;
-//             if (hours > h) return false;
+//     while(l<r){
+//         int mid=l+(r-l)/2;
+//         int hr=0;
+//         for(int i=0;i<piles.length;i++){
+//             hr+=(piles[i]+mid-1)/mid;// or  here mid is we considering as no.of bananas
 //         }
-//         return true;
+
+//         if(hr<=h){
+//             r=mid;
+//         }else{
+//             l=mid+1;
+//         }
+//     }
+     
+//     return l;
 //     }
 // }
 
+
+class Solution{
+    public int minEatingSpeed(int []piles, int h){
+        int left=0;
+        int right=findMaxRange(piles);
+
+        while(left<=right){
+
+            int mid=left+(right-left)/2;
+
+            if(bananaPerHour(piles,h,mid)){
+                right=mid-1;
+            }else{
+                left=mid+1;
+            }
+        }
+        return left;
+    }
+
+    public boolean bananaPerHour(int []piles, int h, int mid){
+        int hour=0;
+        for(int pile:piles){
+            hour+=Math.ceil((double)pile/(double)mid);
+        }
+        if(hour>h){
+            return false;
+        }
+        return true;
+    }
+
+
+    public int findMaxRange(int []piles){
+        int ans=0;
+        for(int pile:piles){
+            ans=Math.max(ans,pile);
+        }
+
+        return ans;
+    }
+}
 ```
 
 ---
