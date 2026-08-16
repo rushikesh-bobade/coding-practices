@@ -40,9 +40,9 @@ Total amount you can rob = 2 + 9 + 1 = 12.
 ## Solution
 
 **Language:** Java  
-**Runtime:** 0 ms  
-**Memory:** 42.6 MB  
-**Submitted:** 2026-08-16T15:47:21.698Z  
+**Runtime:** 1 ms (beats 1.92%)  
+**Memory:** 42.8 MB (beats 57.38%)  
+**Submitted:** 2026-08-16T15:47:26.845Z  
 
 ```java
 //Maximum sum of non-adjacent elements
