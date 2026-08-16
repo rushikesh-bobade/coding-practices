@@ -41,9 +41,9 @@ Explanation: In this case, no transactions are done and the max profit = 0.
 ## Solution
 
 **Language:** Java  
-**Runtime:** 2 ms (beats 42.73%)  
-**Memory:** 94.6 MB (beats 15.77%)  
-**Submitted:** 2026-08-16T19:19:42.375Z  
+**Runtime:** 1 ms (beats 99.96%)  
+**Memory:** 94.7 MB (beats 15.77%)  
+**Submitted:** 2026-08-16T19:20:57.274Z  
 
 ```java
 class Solution {
@@ -51,7 +51,7 @@ class Solution {
         int profit=0;
         int mini=prices[0];
 
-        for(int i=1;i<prices.length;i++){
+        for(int i=0;i<prices.length;i++){
             int cost=prices[i]-mini;
             profit=Math.max(cost,profit);
             mini=Math.min(mini,prices[i]);
