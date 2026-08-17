@@ -63,14 +63,16 @@ Output:
 ## Solution
 
 **Language:** SQL  
-**Runtime:** 527 ms (beats 5.02%)  
+**Runtime:** 367 ms (beats 15.99%)  
 **Memory:** 0B (beats 100.00%)  
-**Submitted:** 2026-08-17T18:18:10.479Z  
+**Submitted:** 2026-08-17T18:18:49.180Z  
 
 ```sql
 # Write your MySQL query statement below
-SELECT name,population,area FROM World 
-WHERE area>=3000000 OR population>=25000000;
+SELECT name,population,area
+FROM World 
+WHERE area>=3000000 
+OR population>=25000000;
 ```
 
 ---
