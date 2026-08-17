@@ -81,27 +81,21 @@ addressId = 1 contains information about the address of personId = 2.
 ## Solution
 
 **Language:** SQL  
-**Runtime:** 497 ms (beats 25.30%)  
+**Runtime:** 719 ms (beats 5.23%)  
 **Memory:** 0B (beats 100.00%)  
-**Submitted:** 2026-08-17T18:02:20.906Z  
+**Submitted:** 2026-08-17T18:00:32.007Z  
 
 ```sql
 # Write your MySQL query statement below
-SELECT firstName,lastname,city,state
-from Person p
-LEFT JOIN Address a
+SELECT 
+    p.firstName,
+    p.lastName,
+    a.city,
+    a.state
+FROM Person AS p
+LEFT JOIN 
+Address AS a
 ON p.personId=a.personId;
-
-
--- SELECT 
---     p.firstName,
---     p.lastName,
---     a.city,
---     a.state
--- FROM Person AS p
--- LEFT JOIN 
--- Address AS a
--- ON p.personId=a.personId;
 ```
 
 ---
