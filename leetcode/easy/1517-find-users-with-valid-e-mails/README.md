@@ -69,19 +69,27 @@ The mail of user 7 starts with a period.
 ## Solution
 
 **Language:** SQL  
-**Runtime:** 1141 ms (beats 8.42%)  
+**Runtime:** 923 ms (beats 28.88%)  
 **Memory:** 0B (beats 100.00%)  
-**Submitted:** 2026-08-18T16:22:04.305Z  
+**Submitted:** 2026-08-18T16:23:00.581Z  
 
 ```sql
 # Write your MySQL query statement below
-SELECT user_id, name, mail
-FROM Users
-WHERE REGEXP_LIKE(
-    mail,
-    '^[A-Za-z][A-Za-z0-9_.-]*@leetcode[.]com$',
-    'c'
-);
+-- SELECT user_id, name, mail
+-- FROM Users
+-- WHERE REGEXP_LIKE(
+--     mail,
+--     '^[A-Za-z][A-Za-z0-9_.-]*@leetcode[.]com$',
+--     'c'
+-- );
+
+SELECT
+    *
+FROM
+    Users u
+WHERE
+    mail REGEXP '^[a-zA-Z][a-zA-Z0-9_.-]*@leetcode\\.com$'
+    AND mail LIKE BINARY '%@leetcode.com'
 
 -- How the pattern works
 -- ^ → start of email
