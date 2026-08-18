@@ -58,18 +58,30 @@ Explanation: Bob and George both have a condition that starts with DIAB1.
 ## Solution
 
 **Language:** SQL  
-**Runtime:** 438 ms (beats 55.00%)  
+**Runtime:** 469 ms (beats 34.65%)  
 **Memory:** 0B (beats 100.00%)  
-**Submitted:** 2026-08-18T10:07:37.431Z  
+**Submitted:** 2026-08-18T16:13:04.095Z  
 
 ```sql
 # Write your MySQL query statement below
-select patient_id,
-       patient_name,
-       conditions
-from Patients
-where  conditions like "DIAB1%"
-    OR conditions like "% DIAB1%";
+-- select patient_id,
+--        patient_name,
+--        conditions
+-- from Patients
+-- where  conditions like "DIAB1%"
+--     OR conditions like "% DIAB1%";
+
+
+SELECT patient_id, patient_name, conditions
+FROM Patients
+WHERE conditions REGEXP '(^| )DIAB1';
+
+
+
+-- ^ → beginning of the conditions string
+-- | → OR
+-- → a space before the condition
+-- DIAB1 → required prefix
 ```
 
 ---
