@@ -11,13 +11,14 @@ class Solution {
                 
             }
             if(sum==i){
-            minAns=Math.min(minAns,i);
+            // minAns=Math.min(minAns,i);
+            return i;
             }
         }
-        if(minAns>nums.length){
-            return -1;
-        }
+        // if(minAns>nums.length){
+        //     return -1;
+        // }
 
-        return minAns;
+        return -1;
     }
 }
