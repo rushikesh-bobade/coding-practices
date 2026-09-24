@@ -42,71 +42,37 @@ Given an integer array `nums` and an integer `k`, return  *the*  `k`  *most freq
 ## Solution
 
 **Language:** Java  
-**Runtime:** 2 ms  
-**Memory:** 42.8 MB  
-**Submitted:** 2026-06-27T17:35:50.805Z  
+**Runtime:** 15 ms (beats 55.09%)  
+**Memory:** 47.7 MB (beats 33.09%)  
+**Submitted:** 2026-09-24T17:21:34.891Z  
 
 ```java
 class Solution {
     public int[] topKFrequent(int[] nums, int k) {
 
-        HashMap<Integer,Integer>freqMpp=new HashMap<>();
+       HashMap<Integer,Integer>mpp=new HashMap<>();
 
-        for(int num:nums){
-            freqMpp.put(num,freqMpp.getOrDefault(num,0)+1);
+       for(int num:nums){
+        mpp.put(num,mpp.getOrDefault(num,0)+1);
+       }
 
-        // if (freqMpp.containsKey(num)) {
-        // freqMpp.put(num, freqMpp.get(num) + 1);
-        // } else {
-        //     freqMpp.put(num, 1);
-        // }
+       PriorityQueue<Integer>pq=new PriorityQueue<>(
+        (a,b)->mpp.get(a)-mpp.get(b)
+       );
+
+       for(int num:mpp.keySet()){
+        pq.offer(num);
+        if(pq.size()>k){
+            pq.poll();
         }
+       }
 
-            PriorityQueue<Integer> queue = new PriorityQueue<>(
-            (a, b) -> freqMpp.get(a) - freqMpp.get(b)
-        );
+       int ans[]=new int[k];
+       for(int i=0;i<k;i++){
+        ans[i]=pq.poll();
+       }
 
-        for (int num : freqMpp.keySet()) {
-            queue.add(num);
-            if (queue.size() > k) {
-                queue.poll();
-            }
-        }
-
-        int[] result = new int[queue.size()];
-        for (int i = 0; i < result.length; i++) {
-            result[i] = queue.poll();
-        }
-        return result;
-
-        // HashMap <Integer,Integer> freqMpp=new HashMap<>();
-        // List<Integer>[]bucket=new List[nums.length+1];
-        
-        // for(int num:nums){
-        //     freqMpp.put(num,freqMpp.getOrDefault(num,0)+1);
-        // }
-
-        // for(int key:freqMpp.keySet()){
-        //     int freq=freqMpp.get(key);
-        //     if(bucket[freq]==null){
-        //         bucket[freq]=new ArrayList<>();
-        //     }
-
-        //     bucket[freq].add(key);
-        // }
-
-        // int []ans=new int[k];
-        // int counter=0;
-
-        // for(int pos=nums.length;pos>0 && counter<k; pos--){
-        //     if(bucket[pos]!=null){
-        //         for(int n:bucket[pos]){
-        //         ans[counter++]=n;
-        //         if(counter==k) break;
-        //         }   
-        //     }
-        // }
-        // return ans;
+       return ans;
     }
 }
 ```
